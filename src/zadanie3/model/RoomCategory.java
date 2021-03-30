@@ -1,10 +1,10 @@
 package zadanie3.model;
 
-public class Service {
+public class RoomCategory {
     private String description = null;
     private double cost = 0;
 
-    public Service(String description, double cost) {
+    public RoomCategory(String description, double cost) {
         this.description = description;
         this.cost = cost;
     }
