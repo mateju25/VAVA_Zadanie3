@@ -16,4 +16,9 @@ public class RoomCategory {
     public double getCost() {
         return cost;
     }
+
+    @Override
+    public String toString() {
+        return description;
+    }
 }

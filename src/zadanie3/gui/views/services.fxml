@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<Pane prefHeight="541.0" prefWidth="887.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="zadanie3.gui.controller.ServiceController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="541.0" stroke="BLACK" strokeType="INSIDE" width="887.0">
+         <fill>
+            <LinearGradient endX="0.009523809523809525" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color green="0.13866665959358215" blue="0.6399999856948853" opacity="0.752173900604248" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.17498123790338507">
+                     <color>
+                        <Color green="0.13866665959358215" blue="0.6399999856948853" opacity="0.75" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.6052631735801697" green="0.498781681060791" blue="0.498781681060791" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <Button id="helpbutton" fx:id="btnCancel" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#cancel" prefHeight="40.0" prefWidth="87.0" stylesheets="@../resources/buttons.css" text="Späť">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>
+      <ListView id="listview" fx:id="viewServices" layoutX="94.0" layoutY="63.0" prefHeight="361.0" prefWidth="699.0" stylesheets="@../resources/buttons.css" />
+      <Button id="helpbutton" layoutX="345.0" layoutY="471.0" mnemonicParsing="false" onAction="#addService" prefHeight="40.0" prefWidth="87.0" stylesheets="@../resources/buttons.css" text="Pridať">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>
+      <Button id="helpbutton" layoutX="455.0" layoutY="471.0" mnemonicParsing="false" onAction="#removeService" prefHeight="40.0" prefWidth="87.0" stylesheets="@../resources/buttons.css" text="Vymaž">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>
+      <TextField fx:id="textName" layoutX="283.0" layoutY="433.0" promptText="Popis" />
+      <TextField fx:id="textCost" layoutX="455.0" layoutY="433.0" promptText="Cena" />
+      <Label fx:id="warning" alignment="CENTER" contentDisplay="CENTER" layoutX="313.0" layoutY="519.0" prefHeight="17.0" prefWidth="261.0" textAlignment="CENTER" textFill="RED" />
+   </children>
+</Pane>

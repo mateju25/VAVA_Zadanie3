@@ -16,4 +16,9 @@ public class Service {
     public double getCost() {
         return cost;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Služba: %-40s, Cena: %s",description, String.valueOf(cost));
+    }
 }
