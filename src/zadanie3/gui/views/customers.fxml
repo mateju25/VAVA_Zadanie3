@@ -11,9 +11,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="541.0" prefWidth="887.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="zadanie3.gui.controller.CustomerController">
+<Pane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="zadanie3.gui.controller.CustomerController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="541.0" stroke="BLACK" strokeType="INSIDE" width="887.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="700.0" stroke="BLACK" strokeType="INSIDE" width="1000.0">
          <fill>
             <LinearGradient endX="0.009523809523809525" endY="1.0">
                <stops>
@@ -41,19 +41,19 @@
             <Font size="25.0" />
          </font>
       </Button>
-      <ListView id="listview" fx:id="viewCustomers" layoutX="94.0" layoutY="63.0" prefHeight="361.0" prefWidth="699.0" stylesheets="@../resources/buttons.css" />
-      <Button id="helpbutton" layoutX="345.0" layoutY="471.0" mnemonicParsing="false" onAction="#addCustomer" prefHeight="40.0" prefWidth="87.0" stylesheets="@../resources/buttons.css" text="Pridať">
+      <ListView id="listview" fx:id="viewCustomers" layoutX="58.0" layoutY="72.0" prefHeight="578.0" prefWidth="699.0" stylesheets="@../resources/buttons.css" />
+      <Button id="helpbutton" layoutX="832.0" layoutY="161.0" mnemonicParsing="false" onAction="#addCustomer" prefHeight="40.0" prefWidth="87.0" stylesheets="@../resources/buttons.css" text="Pridať">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
-      <Button id="helpbutton" layoutX="455.0" layoutY="471.0" mnemonicParsing="false" onAction="#removeCustomer" prefHeight="40.0" prefWidth="87.0" stylesheets="@../resources/buttons.css" text="Vymaž">
+      <Button id="helpbutton" layoutX="833.0" layoutY="244.0" mnemonicParsing="false" onAction="#removeCustomer" prefHeight="40.0" prefWidth="87.0" stylesheets="@../resources/buttons.css" text="Vymaž">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
-      <TextField fx:id="textName" layoutX="283.0" layoutY="433.0" promptText="Meno" />
-      <TextField fx:id="textNumber" layoutX="455.0" layoutY="433.0" promptText="Telefónne číslo" />
-      <Label fx:id="warning" alignment="CENTER" contentDisplay="CENTER" layoutX="313.0" layoutY="519.0" prefHeight="17.0" prefWidth="261.0" textAlignment="CENTER" textFill="RED" />
+      <TextField fx:id="textName" layoutX="801.0" layoutY="81.0" promptText="Meno" />
+      <TextField fx:id="textNumber" layoutX="801.0" layoutY="121.0" promptText="Telefónne číslo" />
+      <Label fx:id="warning" alignment="CENTER" contentDisplay="CENTER" layoutX="758.0" layoutY="207.0" prefHeight="17.0" prefWidth="242.0" textAlignment="CENTER" textFill="RED" />
    </children>
 </Pane>

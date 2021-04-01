@@ -1,8 +1,12 @@
 package zadanie3.model;
 
-public class Service {
+import java.io.Serializable;
+import java.util.Date;
+
+public class Service implements Serializable {
     private String description = null;
     private double cost = 0;
+    private Date used = null;
 
     public Service(String description, double cost) {
         this.description = description;
@@ -17,8 +21,16 @@ public class Service {
         return cost;
     }
 
+    public Date getUsed() {
+        return used;
+    }
+
+    public void setUsed(Date used) {
+        this.used = used;
+    }
+
     @Override
     public String toString() {
-        return String.format("Služba: %-40s, Cena: %s",description, String.valueOf(cost));
+        return String.format("Služba: %-40s Cena: %s",description, String.valueOf(cost));
     }
 }

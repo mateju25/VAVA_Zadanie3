@@ -4,12 +4,16 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="184.0" prefWidth="276.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="zadanie3.gui.controller.NewRoomCategoryController">
+<AnchorPane prefHeight="184.0" prefWidth="276.0" xmlns="http://javafx.com/javafx/8.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="zadanie3.gui.controller.NewRoomCategoryController">
    <children>
-      <Label layoutX="80.0" layoutY="25.0" text="Nová kategória izby" />
+      <Label layoutX="72.0" layoutY="25.0" text="Nová kategória izby">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
       <TextField fx:id="textDescription" layoutX="38.0" layoutY="57.0" prefHeight="25.0" prefWidth="190.0" promptText="Popis" />
       <TextField fx:id="textValue" layoutX="38.0" layoutY="96.0" prefHeight="25.0" prefWidth="190.0" promptText="Cena" />
-      <Button fx:id="btnSave" layoutX="117.0" layoutY="135.0" mnemonicParsing="false" onAction="#save" text="OK" />
+      <Button id="helpbutton" fx:id="btnSave" layoutX="108.0" layoutY="134.0" mnemonicParsing="false" onAction="#save" stylesheets="@../resources/buttons.css" text="OK" />
    </children>
 </AnchorPane>

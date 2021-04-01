@@ -1,6 +1,8 @@
 package zadanie3.model;
 
-public class RoomCategory {
+import java.io.Serializable;
+
+public class RoomCategory implements Serializable {
     private String description = null;
     private double cost = 0;
 

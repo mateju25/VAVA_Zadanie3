@@ -1,12 +1,17 @@
 package zadanie3.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class Database {
+    private  final static Logger LOGGER = Logger.getLogger(Database.class.getName());
+
     private static Database single_instance = null;
+    private Date now = new Date();
     private List<Customer> listOfCustomers = new ArrayList<>();
     private List<Reservation> listOfReservations = new ArrayList<>();
     private List<Accomodation> listOfAccomodations = new ArrayList<>();
@@ -15,22 +20,13 @@ public class Database {
     private List<Service> listOfServices = new ArrayList<>();
     private List<Payment> listOfPayments = new ArrayList<>();
 
-    private Database() {
-        listOfCustomers.add(new Customer("Matej Delincak", "+421999535656"));
-        listOfRoomCategories.add(new RoomCategory("2-lozkova izba", 35));
-        listOfRoomCategories.add(new RoomCategory("1-lozkova izba", 20));
-        listOfRooms.put("P1I1", new Room(listOfRoomCategories.get(0), "P1I1"));
-        listOfRooms.put("P1I2", new Room(listOfRoomCategories.get(1), "P1I2"));
-        listOfRooms.put("P2I1", new Room(listOfRoomCategories.get(1), "P2I1"));
-        listOfServices.add(new Service("Masaz", 10));
-        listOfServices.add(new Service("All Inclusive", 20));
-        listOfServices.add(new Service("Pool", 5));
-    }
+    private Database() {}
 
     public static Database getInstance()
     {
         if (single_instance == null) {
             single_instance = new Database();
+            single_instance.deserialize();
         }
 
         return single_instance;
@@ -49,8 +45,23 @@ public class Database {
         return listOfAccomodations;
     }
 
-    public Map<String, Room> getListOfRooms() {
-        return listOfRooms;
+    public List<Room> getListOfRooms() {
+        return new ArrayList<>(listOfRooms.values());
+    }
+
+    public List<Room> getListOfRooms(Date from, Date to) {
+        List<Room> result = new ArrayList<>(listOfRooms.values());
+        for (Reservation reserv: listOfReservations) {
+            if (from.before(reserv.getAccomodatedTo()) && (reserv.getAccomodatedFrom().before(to))) {
+                result.remove(reserv.getWantedRoom());
+            }
+        }
+        for (Accomodation accomo: listOfAccomodations) {
+            if (from.before(accomo.getAccomodatedTo()) && (accomo.getAccomodatedFrom().before(to))) {
+                result.remove(accomo.getUsedRooms());
+            }
+        }
+        return result;
     }
 
     public List<RoomCategory> getListOfRoomCategories() {
@@ -64,4 +75,103 @@ public class Database {
     public List<Payment> getListOfPayments() {
         return listOfPayments;
     }
+
+    public Date getNow() {
+        return now;
+    }
+
+    public void setNow(Date now) {
+        this.now = now;
+    }
+
+    private void serializeObject(Object obj, String file) throws IOException {
+        ObjectOutputStream outB = new ObjectOutputStream(new FileOutputStream(file));
+        outB.writeObject(obj);
+        outB.close();
+    }
+
+    public void serialize() {
+        String file = "customer.out";
+        try {
+            serializeObject(listOfCustomers, file);
+            file = "roomcategories.out";
+            serializeObject(listOfRoomCategories, file);
+            file = "rooms.out";
+            serializeObject(listOfRooms, file);
+            file = "reservations.out";
+            serializeObject(listOfReservations, file);
+            file = "accomodations.out";
+            serializeObject(listOfAccomodations, file);
+            file = "services.out";
+            serializeObject(listOfServices, file);
+            LOGGER.log(Level.FINEST, "Všetky dáta uložené.");
+        } catch (FileNotFoundException e) {
+            LOGGER.log(Level.SEVERE, "Dátový súbor " + file + " nenájdený.");
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Do dátového súboru " + file + " sa nedá zapísať.");
+        }
+    }
+
+    public void deserialize() {
+        String file = "customer.out";
+        try {
+            ObjectInputStream inB = new ObjectInputStream(new FileInputStream(file));
+            listOfCustomers = (List<Customer>) inB.readObject();
+            inB.close();
+
+            file = "services.out";
+            inB = new ObjectInputStream(new FileInputStream(file));
+            listOfServices = (List<Service>) inB.readObject();
+            inB.close();
+
+            file = "roomcategories.out";
+            inB = new ObjectInputStream(new FileInputStream(file));
+            listOfRoomCategories = (List<RoomCategory>) inB.readObject();
+            inB.close();
+
+            file = "rooms.out";
+            inB = new ObjectInputStream(new FileInputStream(file));
+            Map<String, Room> temp = (Map<String, Room>) inB.readObject();
+            for (Room item :
+                    temp.values()) {
+                item.setCategory(listOfRoomCategories.stream().filter(roomCategory -> roomCategory.getDescription().equals(item.getCategory().getDescription())).collect(Collectors.toList()).get(0));
+            }
+            listOfRooms = temp;
+            inB.close();
+
+            file = "reservations.out";
+            inB = new ObjectInputStream(new FileInputStream(file));
+            List<Reservation> temp2 = (List<Reservation>) inB.readObject();
+            for (Reservation item :
+                    temp2) {
+                item.setWantedRoom(listOfRooms.values().stream().filter(room -> room.getIdentifier().equals(item.getWantedRoom().getIdentifier())).collect(Collectors.toList()).get(0));
+                item.setResponsibleCust(listOfCustomers.stream().filter(cust -> cust.getName().equals(item.getResponsibleCust().getName())).collect(Collectors.toList()).get(0));
+            }
+            inB.close();
+
+            file = "accomodations.out";
+            inB = new ObjectInputStream(new FileInputStream(file));
+            List<Accomodation> temp3 = (List<Accomodation>) inB.readObject();
+            for (Accomodation item :
+                    temp3) {
+                item.setUsedRoom(listOfRooms.values().stream().filter(room -> room.getIdentifier().equals(item.getUsedRooms().getIdentifier())).collect(Collectors.toList()).get(0));
+                item.setResponsibleCust(listOfCustomers.stream().filter(cust -> cust.getName().equals(item.getResponsibleCust().getName())).collect(Collectors.toList()).get(0));
+            }
+            listOfAccomodations = temp3;
+            listOfPayments.addAll(listOfAccomodations.stream().map(Accomodation::getPaid).collect(Collectors.toList()));
+            inB.close();
+//            LOGGER.setLevel(Level.FINEST);
+//            ConsoleHandler handler = new ConsoleHandler();
+//            handler.setLevel(Level.FINEST);
+//            LOGGER.addHandler(handler);
+            LOGGER.log(Level.FINEST, "Všetky dáta načítané správne.");
+        } catch (FileNotFoundException e) {
+            LOGGER.log(Level.WARNING, "Dátový súbor " + file + " nenájdený.");
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Dátový súbor " + file + " sa nedá prečítať.");
+        } catch (ClassNotFoundException e) {
+            LOGGER.log(Level.SEVERE, "Dáta v súbore " + file + " sa nezhodujú s aktuálnym modelom aplikácie.");
+        }
+    }
 }
+

@@ -19,6 +19,7 @@ public class ListCellRoom extends ListCell<Room> {
     public Label textNote;
     public Label textId;
     public ListView<Image> viewImage;
+    public Label textAvailable;
     private FXMLLoader mLLoader;
     @Override
     protected void updateItem(Room emp, boolean empty) {
@@ -61,8 +62,6 @@ public class ListCellRoom extends ListCell<Room> {
                 };
             });
             controller.viewImage.getItems().setAll(emp.getGallery());
-
-
             setText(null);
             setGraphic(controller.pane);
         }

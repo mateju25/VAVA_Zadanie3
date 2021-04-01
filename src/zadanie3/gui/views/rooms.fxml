@@ -9,12 +9,13 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="541.0" prefWidth="887.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="zadanie3.gui.controller.RoomController">
+<Pane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="zadanie3.gui.controller.RoomController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="541.0" stroke="BLACK" strokeType="INSIDE" width="887.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="700.0" stroke="BLACK" strokeType="INSIDE" width="1000.0">
          <fill>
             <LinearGradient endX="0.009523809523809525" endY="1.0">
                <stops>
@@ -42,30 +43,43 @@
             <Font size="25.0" />
          </font>
       </Button>
-      <ListView fx:id="viewRooms" layoutX="94.0" layoutY="63.0" prefHeight="361.0" prefWidth="699.0" />
-      <Button id="helpbutton" layoutX="233.0" layoutY="471.0" mnemonicParsing="false" onAction="#addRoom" prefHeight="40.0" prefWidth="149.0" stylesheets="@../resources/buttons.css" text="Pridať izbu">
+      <ListView fx:id="viewRooms" layoutX="58.0" layoutY="73.0" prefHeight="573.0" prefWidth="699.0" />
+      <Button id="helpbutton" layoutX="805.0" layoutY="171.0" mnemonicParsing="false" onAction="#addRoom" prefHeight="40.0" prefWidth="149.0" stylesheets="@../resources/buttons.css" text="Pridať izbu">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
-      <Button id="helpbutton" layoutX="398.0" layoutY="471.0" mnemonicParsing="false" onAction="#removeRoom" prefHeight="40.0" prefWidth="87.0" stylesheets="@../resources/buttons.css" text="Vymaž">
+      <Button id="helpbutton" layoutX="805.0" layoutY="240.0" mnemonicParsing="false" onAction="#removeRoom" prefHeight="40.0" prefWidth="149.0" stylesheets="@../resources/buttons.css" text="Vymaž izbu">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
-      <TextField fx:id="textId" layoutX="114.0" layoutY="433.0" promptText="Označenie izby" />
-      <TextField fx:id="textNote" layoutX="455.0" layoutY="434.0" promptText="Poznámka" />
-      <Label fx:id="warning" alignment="CENTER" contentDisplay="CENTER" layoutX="313.0" layoutY="519.0" prefHeight="17.0" prefWidth="261.0" textAlignment="CENTER" textFill="RED" />
-      <ChoiceBox fx:id="choiceCategory" layoutX="282.0" layoutY="433.0" prefWidth="150.0" />
-      <Button id="helpbutton" layoutX="625.0" layoutY="428.0" mnemonicParsing="false" onAction="#loadImages" prefHeight="36.0" prefWidth="137.0" stylesheets="@../resources/buttons.css" text="Pridaj obrázky">
+      <TextField fx:id="textId" layoutX="805.0" layoutY="73.0" promptText="Označenie izby" />
+      <TextField fx:id="textNote" layoutX="804.0" layoutY="328.0" promptText="Poznámka" />
+      <Label fx:id="warning" alignment="CENTER" contentDisplay="CENTER" layoutX="762.0" layoutY="218.0" prefHeight="17.0" prefWidth="232.0" textAlignment="CENTER" textFill="RED" />
+      <ChoiceBox fx:id="choiceCategory" layoutX="804.0" layoutY="132.0" prefWidth="150.0" />
+      <Button id="helpbutton" layoutX="803.0" layoutY="432.0" mnemonicParsing="false" onAction="#loadImages" prefHeight="36.0" prefWidth="149.0" stylesheets="@../resources/buttons.css" text="Pridaj obrázky">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
-      <Button id="helpbutton" layoutX="500.0" layoutY="471.0" mnemonicParsing="false" onAction="#addCategory" prefHeight="40.0" prefWidth="149.0" stylesheets="@../resources/buttons.css" text="Pridať kategóriu">
+      <Button id="helpbutton" layoutX="804.0" layoutY="510.0" mnemonicParsing="false" onAction="#addCategory" prefHeight="40.0" prefWidth="149.0" stylesheets="@../resources/buttons.css" text="Pridať kategóriu">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
+      <Button id="helpbutton" layoutX="803.0" layoutY="362.0" mnemonicParsing="false" onAction="#newNote" prefHeight="36.0" prefWidth="149.0" stylesheets="@../resources/buttons.css" text="Pridaj poznámku">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>
+      <Line endX="100.0" layoutX="878.0" layoutY="306.0" startX="-100.0" />
+      <Line endX="100.0" layoutX="877.0" layoutY="413.0" startX="-100.0" />
+      <Line endX="100.0" layoutX="879.0" layoutY="489.0" startX="-100.0" />
+      <Label layoutX="805.0" layoutY="112.0" text="Kategória:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

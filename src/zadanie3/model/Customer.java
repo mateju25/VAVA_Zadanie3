@@ -1,6 +1,8 @@
 package zadanie3.model;
 
-public class Customer {
+import java.io.Serializable;
+
+public class Customer implements Serializable {
     private String name = null;
     private String phoneNumber = null;
 
@@ -19,6 +21,6 @@ public class Customer {
 
     @Override
     public String toString() {
-        return String.format("Meno: %-40s, Telefónne číslo: %s",name, phoneNumber);
+        return String.format("Meno: %-40s Telefónne číslo: %s",name, phoneNumber);
     }
 }

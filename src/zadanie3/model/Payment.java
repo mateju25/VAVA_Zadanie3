@@ -1,26 +1,35 @@
 package zadanie3.model;
 
-import java.time.LocalDateTime;
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
-public class Payment {
-    private LocalDateTime paidDate = LocalDateTime.now();
-    private Accomodation infoAboutAccom = null;
+public class Payment implements Serializable {
+    private Date paidDate = null;
     private boolean isPaidByCard;
 
-    public Payment(Accomodation infoAboutAccom, boolean isPaidByCard) {
-        this.infoAboutAccom = infoAboutAccom;
+    public Payment(Date paidDate, boolean isPaidByCard) {
+        this.paidDate = paidDate;
         this.isPaidByCard = isPaidByCard;
     }
 
-    public LocalDateTime getPaidDate() {
+    public Date getPaidDate() {
         return paidDate;
-    }
-
-    public Accomodation getInfoAboutAccom() {
-        return infoAboutAccom;
     }
 
     public boolean isPaidByCard() {
         return isPaidByCard;
+    }
+
+    @Override
+    public String toString() {
+        Accomodation infoAboutAccom = Database.getInstance().getListOfAccomodations().stream().filter(accomodation -> accomodation.getPaid() == this).collect(Collectors.toList()).get(0);
+        if (isPaidByCard)
+            return "Zákazník " + infoAboutAccom.getResponsibleCust().getName() + " v dni " + new SimpleDateFormat("dd.MM.yyyy").format(paidDate) + " zaplatil za izbu " + infoAboutAccom.getUsedRooms().getIdentifier() + " kartou";
+        else
+            return "Zákazník " + infoAboutAccom.getResponsibleCust().getName() + " v dni " + new SimpleDateFormat("dd.MM.yyyy").format(paidDate) + " zaplatil za izbu " + infoAboutAccom.getUsedRooms().getIdentifier() + " v hotovosti";
+
     }
 }

@@ -6,20 +6,24 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="189.0" prefWidth="627.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="zadanie3.gui.listCells.ListCellRoom">
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="189.0" prefWidth="627.0" xmlns="http://javafx.com/javafx/8.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="zadanie3.gui.listCells.ListCellRoom">
    <children>
-      <Label fx:id="textName" alignment="TOP_LEFT" layoutX="14.0" layoutY="38.0" prefHeight="42.0" prefWidth="156.0" wrapText="true" />
-      <Label fx:id="textValue" alignment="TOP_LEFT" layoutX="176.0" layoutY="35.0" prefHeight="42.0" prefWidth="79.0">
+      <Label fx:id="textName" alignment="TOP_LEFT" layoutX="4.0" layoutY="35.0" prefHeight="42.0" prefWidth="156.0" text="skuska" wrapText="true" />
+      <Label fx:id="textValue" alignment="TOP_LEFT" layoutX="160.0" layoutY="35.0" prefHeight="42.0" prefWidth="79.0" text="skuska">
          <font>
             <Font size="20.0" />
          </font></Label>
-      <Label fx:id="textNote" layoutX="14.0" layoutY="106.0" prefHeight="76.0" prefWidth="219.0" wrapText="true" />
+      <Label fx:id="textNote" alignment="TOP_LEFT" layoutX="14.0" layoutY="106.0" prefHeight="76.0" prefWidth="219.0" text="skuska" wrapText="true" />
       <Label layoutX="14.0" layoutY="85.0" prefHeight="18.0" prefWidth="263.0" text="Poznámka:" />
       <Line endX="100.0" layoutX="115.0" layoutY="80.0" startX="-100.0" />
-      <Label fx:id="textId" layoutX="14.0" prefHeight="30.0" prefWidth="91.0">
+      <Label fx:id="textId" alignment="TOP_LEFT" layoutX="4.0" layoutY="1.0" prefHeight="36.0" prefWidth="107.0" text="skuska">
          <font>
             <Font size="17.0" />
          </font></Label>
       <ListView fx:id="viewImage" layoutX="251.0" layoutY="6.0" orientation="HORIZONTAL" prefHeight="176.0" prefWidth="375.0" />
+      <Label fx:id="textAvailable" alignment="TOP_LEFT" layoutX="109.0" layoutY="-1.0" prefHeight="36.0" prefWidth="134.0" text="skuska">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
    </children>
 </Pane>

@@ -1,14 +1,16 @@
 package zadanie3.model;
 
-import java.time.LocalDate;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
-public class Reservation {
+public class Reservation implements Serializable {
     private Customer responsibleCust = null;
     private Room wantedRoom = null;
-    private LocalDate accomodatedFrom = null;
-    private LocalDate accomodatedTo = null;
+    private Date accomodatedFrom = null;
+    private Date accomodatedTo = null;
 
-    public Reservation(Customer responsibleCust, Room wantedRoom, LocalDate accomodatedFrom, LocalDate accomodatedTo) {
+    public Reservation(Customer responsibleCust, Room wantedRoom, Date accomodatedFrom, Date accomodatedTo) {
         this.responsibleCust = responsibleCust;
         this.wantedRoom = wantedRoom;
         this.accomodatedFrom = accomodatedFrom;
@@ -23,11 +25,32 @@ public class Reservation {
         return wantedRoom;
     }
 
-    public LocalDate getAccomodatedFrom() {
+    public Date getAccomodatedFrom() {
         return accomodatedFrom;
     }
 
-    public LocalDate getAccomodatedTo() {
+    public Date getAccomodatedTo() {
         return accomodatedTo;
+    }
+
+    public double getTotalValue() {
+        long days = Math.abs(accomodatedFrom.getTime() - accomodatedTo.getTime());
+        double free = 1;
+        if (days >= 10)
+            free = 0.9;
+        return TimeUnit.DAYS.convert(days, TimeUnit.MILLISECONDS) * wantedRoom.getCategory().getCost() * free;
+    }
+
+    public void setResponsibleCust(Customer responsibleCust) {
+        this.responsibleCust = responsibleCust;
+    }
+
+    public void setWantedRoom(Room wantedRoom) {
+        this.wantedRoom = wantedRoom;
+    }
+
+    @Override
+    public String toString() {
+        return "Rezervácia na meno " + responsibleCust.getName() + " Izba: " + wantedRoom.getIdentifier();
     }
 }

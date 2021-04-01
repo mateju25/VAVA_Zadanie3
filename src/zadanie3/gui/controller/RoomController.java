@@ -30,7 +30,7 @@ public class RoomController extends PrimitiveController{
 
     public void initialize() {
         viewRooms.setCellFactory(param -> new ListCellRoom());
-        viewRooms.getItems().setAll(Database.getInstance().getListOfRooms().values());
+        viewRooms.getItems().setAll(Database.getInstance().getListOfRooms());
         choiceCategory.getItems().addAll(Database.getInstance().getListOfRoomCategories());
     }
 
@@ -47,13 +47,13 @@ public class RoomController extends PrimitiveController{
             else
                 viewRooms.getSelectionModel().getSelectedItem().getGallery().add(SwingFXUtils.toFXImage(buff, null));
         }
-        viewRooms.getItems().setAll(Database.getInstance().getListOfRooms().values());
+        viewRooms.getItems().setAll(Database.getInstance().getListOfRooms());
     }
 
     public void removeRoom(ActionEvent actionEvent) {
         if (viewRooms.getSelectionModel().getSelectedItem() != null)
             Database.getInstance().getListOfRooms().remove(viewRooms.getSelectionModel().getSelectedItem().getIdentifier());
-        viewRooms.getItems().setAll(Database.getInstance().getListOfRooms().values());
+        viewRooms.getItems().setAll(Database.getInstance().getListOfRooms());
     }
 
     public void addRoom(ActionEvent actionEvent) {
@@ -61,7 +61,7 @@ public class RoomController extends PrimitiveController{
             warning.setText("Vyplň všetky polia!");
         } else {
             warning.setText("");
-            if (Database.getInstance().getListOfRooms().values().stream().anyMatch(room -> room.getIdentifier().equals(textId.getText()))) {
+            if (Database.getInstance().getListOfRooms().stream().anyMatch(room -> room.getIdentifier().equals(textId.getText()))) {
                 warning.setText("Izba už existuje!");
                 return;
             }
@@ -73,9 +73,9 @@ public class RoomController extends PrimitiveController{
             if (images.size() != 0)
                 newRoom.getGallery().addAll(images);
 
-            Database.getInstance().getListOfRooms().put(textId.getText(), newRoom);
+            Database.getInstance().getListOfRooms().add(newRoom);
 
-            viewRooms.getItems().setAll(Database.getInstance().getListOfRooms().values());
+            viewRooms.getItems().setAll(Database.getInstance().getListOfRooms());
         }
     }
 
@@ -94,5 +94,11 @@ public class RoomController extends PrimitiveController{
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void newNote(ActionEvent actionEvent) {
+        if (viewRooms.getSelectionModel().getSelectedItem() != null)
+            viewRooms.getSelectionModel().getSelectedItem().setNote(textNote.getText());
+        viewRooms.getItems().setAll(Database.getInstance().getListOfRooms());
     }
 }
