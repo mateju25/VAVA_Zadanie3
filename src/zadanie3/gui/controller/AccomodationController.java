@@ -1,14 +1,19 @@
 package zadanie3.gui.controller;
 
+import com.sun.javafx.scene.control.skin.DatePickerContent;
+import com.sun.javafx.scene.control.skin.DatePickerSkin;
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import zadanie3.gui.listCells.ListCellAccomodation;
 import zadanie3.gui.listCells.ListCellReservation;
 import zadanie3.model.*;
 
+import javax.xml.soap.Text;
 import java.io.IOException;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class AccomodationController extends PrimitiveController{
@@ -24,6 +29,10 @@ public class AccomodationController extends PrimitiveController{
     public CheckBox checkFilter;
     public CheckBox checkFilterCustomer;
     public CheckBox checkFilterRoom;
+
+    private DateCell iniCell=null;
+    private DateCell endCell=null;
+
 
     public void initialize() {
         viewAccommodation.setCellFactory(param -> new ListCellAccomodation());

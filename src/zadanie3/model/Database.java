@@ -91,20 +91,20 @@ public class Database {
     }
 
     public void serialize() {
-        String file = "customer.out";
+        String file = "Data/customer.out";
         try {
             serializeObject(listOfCustomers, file);
-            file = "roomcategories.out";
+            file = "Data/roomcategories.out";
             serializeObject(listOfRoomCategories, file);
-            file = "rooms.out";
+            file = "Data/rooms.out";
             serializeObject(listOfRooms, file);
-            file = "reservations.out";
+            file = "Data/reservations.out";
             serializeObject(listOfReservations, file);
-            file = "accomodations.out";
+            file = "Data/accomodations.out";
             serializeObject(listOfAccomodations, file);
-            file = "services.out";
+            file = "Data/services.out";
             serializeObject(listOfServices, file);
-            file = "payments.out";
+            file = "Data/payments.out";
             serializeObject(listOfPayments, file);
             LOGGER.log(Level.FINEST, "Všetky dáta uložené.");
         } catch (FileNotFoundException e) {
@@ -115,28 +115,28 @@ public class Database {
     }
 
     public void deserialize() {
-        String file = "customer.out";
+        String file = "Data/customer.out";
         try {
             ObjectInputStream inB = new ObjectInputStream(new FileInputStream(file));
             listOfCustomers = (List<Customer>) inB.readObject();
             inB.close();
 
-            file = "services.out";
+            file = "Data/services.out";
             inB = new ObjectInputStream(new FileInputStream(file));
             listOfServices = (List<Service>) inB.readObject();
             inB.close();
 
-            file = "payments.out";
+            file = "Data/payments.out";
             inB = new ObjectInputStream(new FileInputStream(file));
             listOfPayments = (List<Payment>) inB.readObject();
             inB.close();
 
-            file = "roomcategories.out";
+            file = "Data/roomcategories.out";
             inB = new ObjectInputStream(new FileInputStream(file));
             listOfRoomCategories = (List<RoomCategory>) inB.readObject();
             inB.close();
 
-            file = "rooms.out";
+            file = "Data/rooms.out";
             inB = new ObjectInputStream(new FileInputStream(file));
             Map<String, Room> temp = (Map<String, Room>) inB.readObject();
             for (Room item :
@@ -146,7 +146,7 @@ public class Database {
             listOfRooms = temp;
             inB.close();
 
-            file = "reservations.out";
+            file = "Data/reservations.out";
             inB = new ObjectInputStream(new FileInputStream(file));
             List<Reservation> temp2 = (List<Reservation>) inB.readObject();
             for (Reservation item :
@@ -156,7 +156,7 @@ public class Database {
             }
             inB.close();
 
-            file = "accomodations.out";
+            file = "Data/accomodations.out";
             inB = new ObjectInputStream(new FileInputStream(file));
             List<Accomodation> temp3 = (List<Accomodation>) inB.readObject();
             for (Accomodation item :
