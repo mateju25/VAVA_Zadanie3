@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -61,7 +62,8 @@ public class ListCellRoom extends ListCell<Room> {
                     }
                 };
             });
-            controller.viewImage.getItems().setAll(emp.getGallery());
+            if (emp.getGallery() != null)
+                controller.viewImage.getItems().setAll(emp.getGallery());
             setText(null);
             setGraphic(controller.pane);
         }

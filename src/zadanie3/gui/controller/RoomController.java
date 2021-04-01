@@ -27,10 +27,11 @@ public class RoomController extends PrimitiveController{
     public ListView<Room> viewRooms;
 
     private List<Image> images = new ArrayList<>();
+    private List<String> paths = new ArrayList<>();
 
     public void initialize() {
         viewRooms.setCellFactory(param -> new ListCellRoom());
-        viewRooms.getItems().setAll(Database.getInstance().getListOfRooms());
+        viewRooms.getItems().setAll(Database.getInstance().getListOfRooms().values());
         choiceCategory.getItems().addAll(Database.getInstance().getListOfRoomCategories());
     }
 
@@ -42,18 +43,22 @@ public class RoomController extends PrimitiveController{
         File selectedFile = fileChooser.showOpenDialog(viewRooms.getScene().getWindow());
         if (selectedFile != null) {
             BufferedImage buff = ImageIO.read(selectedFile);
-            if (viewRooms.getSelectionModel().getSelectedItem() == null)
+            if (viewRooms.getSelectionModel().getSelectedItem() == null) {
                 images.add(SwingFXUtils.toFXImage(buff, null));
-            else
+                paths.add(selectedFile.getPath());
+            }
+            else {
                 viewRooms.getSelectionModel().getSelectedItem().getGallery().add(SwingFXUtils.toFXImage(buff, null));
+                viewRooms.getSelectionModel().getSelectedItem().getPathsForImages().add(selectedFile.getPath());
+            }
         }
-        viewRooms.getItems().setAll(Database.getInstance().getListOfRooms());
+        viewRooms.getItems().setAll(Database.getInstance().getListOfRooms().values());
     }
 
     public void removeRoom(ActionEvent actionEvent) {
         if (viewRooms.getSelectionModel().getSelectedItem() != null)
             Database.getInstance().getListOfRooms().remove(viewRooms.getSelectionModel().getSelectedItem().getIdentifier());
-        viewRooms.getItems().setAll(Database.getInstance().getListOfRooms());
+        viewRooms.getItems().setAll(Database.getInstance().getListOfRooms().values());
     }
 
     public void addRoom(ActionEvent actionEvent) {
@@ -61,7 +66,7 @@ public class RoomController extends PrimitiveController{
             warning.setText("Vyplň všetky polia!");
         } else {
             warning.setText("");
-            if (Database.getInstance().getListOfRooms().stream().anyMatch(room -> room.getIdentifier().equals(textId.getText()))) {
+            if (Database.getInstance().getListOfRooms().values().stream().anyMatch(room -> room.getIdentifier().equals(textId.getText()))) {
                 warning.setText("Izba už existuje!");
                 return;
             }
@@ -70,12 +75,14 @@ public class RoomController extends PrimitiveController{
             if (!textNote.getText().isEmpty())
                 newRoom.setNote(textNote.getText());
 
-            if (images.size() != 0)
+            if (images.size() != 0) {
                 newRoom.getGallery().addAll(images);
+                newRoom.getPathsForImages().addAll(paths);
+            }
 
-            Database.getInstance().getListOfRooms().add(newRoom);
+            Database.getInstance().getListOfRooms().put(textId.getText(), newRoom);
 
-            viewRooms.getItems().setAll(Database.getInstance().getListOfRooms());
+            viewRooms.getItems().setAll(Database.getInstance().getListOfRooms().values());
         }
     }
 
@@ -99,6 +106,7 @@ public class RoomController extends PrimitiveController{
     public void newNote(ActionEvent actionEvent) {
         if (viewRooms.getSelectionModel().getSelectedItem() != null)
             viewRooms.getSelectionModel().getSelectedItem().setNote(textNote.getText());
-        viewRooms.getItems().setAll(Database.getInstance().getListOfRooms());
+        viewRooms.getItems().setAll(Database.getInstance().getListOfRooms().values());
+        textNote.setText("");
     }
 }

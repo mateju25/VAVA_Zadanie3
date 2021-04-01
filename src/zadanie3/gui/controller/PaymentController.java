@@ -38,6 +38,7 @@ public class PaymentController extends PrimitiveController{
             Payment newPayment = new Payment(Database.getInstance().getNow(), checkCard.isSelected());
             Database.getInstance().getListOfPayments().add(newPayment);
             choiceAccommodation.getSelectionModel().getSelectedItem().setPaid(newPayment);
+            newPayment.refreshDescription();
             viewPayments.getItems().setAll(Database.getInstance().getListOfPayments());
             choiceAccommodation.getItems().setAll(Database.getInstance().getListOfAccomodations().stream().filter(accomodation -> accomodation.getPaid()==null).collect(Collectors.toList()));
         }

@@ -21,7 +21,7 @@
             <Font size="17.0" />
          </font></Label>
       <ListView fx:id="viewImage" layoutX="251.0" layoutY="6.0" orientation="HORIZONTAL" prefHeight="176.0" prefWidth="375.0" />
-      <Label fx:id="textAvailable" alignment="TOP_LEFT" layoutX="109.0" layoutY="-1.0" prefHeight="36.0" prefWidth="134.0" text="skuska">
+      <Label fx:id="textAvailable" alignment="TOP_LEFT" layoutX="109.0" layoutY="-1.0" prefHeight="36.0" prefWidth="134.0">
          <font>
             <Font size="17.0" />
          </font></Label>

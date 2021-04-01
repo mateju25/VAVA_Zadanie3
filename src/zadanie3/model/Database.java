@@ -45,8 +45,8 @@ public class Database {
         return listOfAccomodations;
     }
 
-    public List<Room> getListOfRooms() {
-        return new ArrayList<>(listOfRooms.values());
+    public Map<String, Room> getListOfRooms() {
+        return listOfRooms;
     }
 
     public List<Room> getListOfRooms(Date from, Date to) {
@@ -104,6 +104,8 @@ public class Database {
             serializeObject(listOfAccomodations, file);
             file = "services.out";
             serializeObject(listOfServices, file);
+            file = "payments.out";
+            serializeObject(listOfPayments, file);
             LOGGER.log(Level.FINEST, "Všetky dáta uložené.");
         } catch (FileNotFoundException e) {
             LOGGER.log(Level.SEVERE, "Dátový súbor " + file + " nenájdený.");
@@ -122,6 +124,11 @@ public class Database {
             file = "services.out";
             inB = new ObjectInputStream(new FileInputStream(file));
             listOfServices = (List<Service>) inB.readObject();
+            inB.close();
+
+            file = "payments.out";
+            inB = new ObjectInputStream(new FileInputStream(file));
+            listOfPayments = (List<Payment>) inB.readObject();
             inB.close();
 
             file = "roomcategories.out";
@@ -158,7 +165,7 @@ public class Database {
                 item.setResponsibleCust(listOfCustomers.stream().filter(cust -> cust.getName().equals(item.getResponsibleCust().getName())).collect(Collectors.toList()).get(0));
             }
             listOfAccomodations = temp3;
-            listOfPayments.addAll(listOfAccomodations.stream().map(Accomodation::getPaid).collect(Collectors.toList()));
+//            listOfPayments.addAll(listOfAccomodations.stream().map(Accomodation::getPaid).collect(Collectors.toList()));
             inB.close();
 //            LOGGER.setLevel(Level.FINEST);
 //            ConsoleHandler handler = new ConsoleHandler();

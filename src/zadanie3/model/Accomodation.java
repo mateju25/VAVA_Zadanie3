@@ -68,7 +68,7 @@ public class Accomodation implements Serializable {
             services += serv.getCost();
         }
         double free = 1;
-        if (days >= 10)
+        if (TimeUnit.DAYS.convert(days, TimeUnit.MILLISECONDS) >= 10)
             free = 0.9;
         return TimeUnit.DAYS.convert(days, TimeUnit.MILLISECONDS) * usedRoom.getCategory().getCost() * free + services;
     }

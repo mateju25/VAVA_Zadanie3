@@ -80,6 +80,7 @@ public class AccomodationController extends PrimitiveController{
         if (viewAccommodation.getSelectionModel().getSelectedItem() != null) {
             viewAccommodation.getSelectionModel().getSelectedItem().getUsedRooms().setFree(true);
             Database.getInstance().getListOfAccomodations().remove(viewAccommodation.getSelectionModel().getSelectedItem());
+
         }
         viewAccommodation.getItems().setAll(Database.getInstance().getListOfAccomodations());
         choiceReservation.getItems().setAll(Database.getInstance().getListOfReservations());

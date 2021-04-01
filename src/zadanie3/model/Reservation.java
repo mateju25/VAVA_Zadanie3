@@ -36,7 +36,7 @@ public class Reservation implements Serializable {
     public double getTotalValue() {
         long days = Math.abs(accomodatedFrom.getTime() - accomodatedTo.getTime());
         double free = 1;
-        if (days >= 10)
+        if (TimeUnit.DAYS.convert(days, TimeUnit.MILLISECONDS) >= 10)
             free = 0.9;
         return TimeUnit.DAYS.convert(days, TimeUnit.MILLISECONDS) * wantedRoom.getCategory().getCost() * free;
     }

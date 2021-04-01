@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -20,7 +21,7 @@ public class PrimitiveController {
 
         Stage window = new Stage();
         window.setResizable(false);
-//        window.getIcons().add(new Image(getClass().getResourceAsStream("/app/gui/views/Icon.png")));
+        window.getIcons().add(new Image(getClass().getResourceAsStream("/zadanie3/gui/resources/icon.png")));
         window.initModality(Modality.APPLICATION_MODAL);
         window.setScene(scene);
         window.showAndWait();

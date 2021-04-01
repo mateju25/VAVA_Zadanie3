@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import zadanie3.model.Database;
 
@@ -17,6 +18,7 @@ public class Main extends Application {
         primaryStage.setTitle("Hotel book");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/zadanie3/gui/resources/icon.png")));
         primaryStage.show();
     }
 
