@@ -1,28 +1,22 @@
 package zadanie3.gui.controller;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 import javafx.util.StringConverter;
-import zadanie3.gui.listCells.ListCellRoom;
 import zadanie3.model.Database;
 
-import javax.swing.text.DateFormatter;
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class MainController extends PrimitiveController{
 
@@ -38,8 +32,11 @@ public class MainController extends PrimitiveController{
     public Button btnReservation;
 
     private DateTimeFormatter dateTimeFormatter = null;
+    private ResourceBundle bundle = null;
 
     public void initialize() {
+        Locale.setDefault(new Locale("sk"));
+        bundle = ResourceBundle.getBundle("zadanie3/gui/resources/slovak");
         datePick.setValue(Database.getInstance().getNow().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.uuuu");
         setNewFormat();
@@ -99,30 +96,29 @@ public class MainController extends PrimitiveController{
 
     public void changeToSlovak(MouseEvent mouseEvent) {
         Locale.setDefault(new Locale("sk"));
-        btnAccommodation.setText("Ubytovania");
-        btnPayment.setText("Platby");
-        btnReservation.setText("Rezervácie");
-        btnRoom.setText("Izby");
-        btnCustomer.setText("Zákazníci");
-        btnService.setText("Služby");
-        textDate.setText("Aktuálny dátum:");
-        dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.uuuu");
+        bundle = ResourceBundle.getBundle("zadanie3/gui/resources/slovak");
+        refreshTexts();
         setNewFormat();
         datePick.setValue(Database.getInstance().getNow().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
     }
 
     public void changeToEnglish(MouseEvent mouseEvent) {
         Locale.setDefault(new Locale("us"));
-        btnAccommodation.setText("Accomodation");
-        btnPayment.setText("Payment");
-        btnReservation.setText("Reservation");
-        btnRoom.setText("Rooms");
-        btnCustomer.setText("Customers");
-        btnService.setText("Services");
-        textDate.setText("Actual date:");
-        dateTimeFormatter = DateTimeFormatter.ofPattern("MM/dd/uuuu");
+        bundle = ResourceBundle.getBundle("zadanie3/gui/resources/english");
+        refreshTexts();
         setNewFormat();
         datePick.setValue(Database.getInstance().getNow().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+    }
+
+    private void refreshTexts() {
+        dateTimeFormatter = DateTimeFormatter.ofPattern(bundle.getString("DATE"));
+        btnAccommodation.setText(bundle.getString("accomodation"));
+        btnPayment.setText(bundle.getString("payment"));
+        btnReservation.setText(bundle.getString("reservation"));
+        btnRoom.setText(bundle.getString("rooms"));
+        btnCustomer.setText(bundle.getString("customers"));
+        btnService.setText(bundle.getString("services"));
+        textDate.setText(bundle.getString("actual.date"));
     }
 
     private void setNewFormat() {
